@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login | Next-Gen IDS</title>
+  <style>
+    body { background-color: #1e1e2f; color: #eee; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; }
+    form { background: #2c2c3c; padding: 20px; border-radius: 10px; width: 300px; }
+    input { width: 92%; padding: 10px; margin: 8px 0; }
+    button { width: 100%; padding: 10px; background: #2196f3; color: white; border: none; border-radius: 5px; }
+    .error { color: #ff4c4c; }
+  </style>
+</head>
+<body>
+  <form method="POST">
+    <h2>🔐 Login - IDS Pipeline</h2>
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
+</body>
+</html>

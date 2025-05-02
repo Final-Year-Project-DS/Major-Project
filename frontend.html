@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Next-Gen IDS – Pipeline Monitor</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      padding: 20px;
+    }
+    h1 {
+      color: #58a6ff;
+    }
+    #output {
+      background-color: #161b22;
+      border: 1px solid #30363d;
+      padding: 20px;
+      height: 400px;
+      overflow-y: auto;
+      white-space: pre-line;
+      font-family: monospace;
+    }
+    button {
+      background-color: #238636;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      margin-top: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #2ea043;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🚀 Next-Gen IDS Pipeline Monitor</h1>
+  <div id="output">Click "Run Pipeline" to start...\n</div>
+  <button onclick="startPipeline()">▶️ Run Full Pipeline</button>
+
+  <script>
+    let pipelineStarted = false;
+  
+    function startPipeline() {
+      if (pipelineStarted) return;  // prevent multiple triggers
+      pipelineStarted = true;
+  
+      const outputBox = document.getElementById('output');
+      outputBox.textContent = "⏳ Starting pipeline...\n";
+  
+      const eventSource = new EventSource("/run_all_stream");
+  
+      eventSource.onmessage = function(event) {
+        outputBox.textContent += event.data + "\n";
+        outputBox.scrollTop = outputBox.scrollHeight;
+      };
+  
+      eventSource.onerror = () => {
+        console.warn("ℹ️ Stream closed (likely due to Gradio redirect).");
+        eventSource.close();
+      };
+    }
+  </script>    
+
+</body>
+</html>

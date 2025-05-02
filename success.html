@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pipeline Started</title>
+  <style>
+    body { font-family: sans-serif; background-color: #1b1b2f; color: #eee; text-align: center; padding-top: 100px; }
+    .card { background: #292b40; display: inline-block; padding: 30px; border-radius: 12px; }
+    .success { color: #00e676; }
+    .fail { color: #ff1744; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>🚀 IDS Pipeline Execution</h2>
+    <p>ML Training: <span class="{{ 'success' if ml else 'fail' }}">{{ '✅ Success' if ml else '❌ Failed' }}</span></p>
+    <p>FL-RL Training: <span class="{{ 'success' if fl else 'fail' }}">{{ '✅ Success' if fl else '❌ Failed' }}</span></p>
+    <p>LLM Gradio Assistant: <span class="success">⚙️ Launching...</span></p>
+    <br><br>
+    <a href="/logout" style="color:#03a9f4;">🔓 Logout</a>
+  </div>
+</body>
+</html>
